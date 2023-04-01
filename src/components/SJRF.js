@@ -14,7 +14,7 @@ let SjrfSolver = (AT = [], BT = []) => {
     
     let chart = []
     let t = 0
-    while (info.length != 0) {
+    while (info.length !== 0) {
         let curr = []
 
         info.forEach((e) => {
@@ -31,7 +31,7 @@ let SjrfSolver = (AT = [], BT = []) => {
 
         // console.log("a",curr)
 
-        if (curr.length != 0) {
+        if (curr.length !== 0) {
 
             let CDetail = {}
             info.forEach((ele, i) => {
@@ -42,7 +42,7 @@ let SjrfSolver = (AT = [], BT = []) => {
 
             })
 
-            if (CDetail.Bt == 1) {
+            if (CDetail.Bt === 1) {
                 chart.push(curr[0]);
                 t = t + 1;
                 curr[0]["CT"] = t

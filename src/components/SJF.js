@@ -12,7 +12,7 @@ let SjfSolver = (AT=[],BT=[]) => {
     info.sort((a, b) => a.AT - b.AT)
     let chart = []
     let t = 0
-    while (info.length != 0) {
+    while (info.length !== 0) {
         let curr = []
 
         info.forEach((e) => {
@@ -29,7 +29,7 @@ let SjfSolver = (AT=[],BT=[]) => {
 
         // console.log("a",curr)
 
-        if (curr.length != 0) {
+        if (curr.length !== 0) {
 
             t = t + curr[0].BT;
             curr[0]["CT"] = t
@@ -44,7 +44,6 @@ let SjfSolver = (AT=[],BT=[]) => {
             curr.shift()
         }
         else {
-            // console.log(curr)
             t++;
         }
 
