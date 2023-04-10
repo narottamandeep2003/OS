@@ -8,7 +8,7 @@ let SjfSolver = (AT=[],BT=[]) => {
 
     // insert the value into info array
     for (let i = 0; i < AT.length; i++) {
-        info.push({ "index": i, "AT": AT[i], "BT": BT[i] })
+        info.push({ "index": i, "AT": AT[i], "BT": BT[i],"RT":-1 })
     }
 
     // sort the arr according to arrival time
@@ -38,6 +38,9 @@ let SjfSolver = (AT=[],BT=[]) => {
         // and push the process data into chart array and remove from info array 
         if (curr.length !== 0) {
 
+            if(curr[0].RT==-1){
+                curr[0].RT=Math.abs(curr[0].AT-t);
+            }
             t = t + curr[0].BT;
             curr[0]["CT"] = t
             chart.push(curr[0]);
@@ -56,18 +59,20 @@ let SjfSolver = (AT=[],BT=[]) => {
     }
 
     // calculate average Tat and average Wat and update the value in chart array
-    let avgTat=0,avgWat=0
+    let avgTat=0,avgWat=0,avgRt=0
     chart.forEach((ele, i) => {
         chart[i]['TAT'] = Math.abs(ele.CT - ele.AT)
         chart[i]['WAT'] = Math.abs(ele.TAT - ele.BT)
         avgTat+=chart[i]['TAT']
         avgWat+=chart[i]['WAT']
+        avgRt+=chart[i]['RT']
     })
     avgTat=avgTat/chart.length
     avgWat=avgWat/chart.length
+    avgRt=avgRt/chart.length
 
     // return the chart array , avgTat , avgWat
-    return {chart,avgTat,avgWat}
+    return {chart,avgTat,avgWat,avgRt}
 }
 
 

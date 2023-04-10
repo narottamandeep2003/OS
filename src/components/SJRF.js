@@ -6,7 +6,7 @@ let SjrfSolver = (AT = [], BT = []) => {
     // insert the value into info array
     for (let i = 0; i < AT.length; i++) {
 
-        info.push({ "index": i, "AT": AT[i], "BT": BT[i] })
+        info.push({ "index": i, "AT": AT[i], "BT": BT[i], "RT": -1 })
 
 
     }
@@ -46,6 +46,10 @@ let SjrfSolver = (AT = [], BT = []) => {
 
             })
 
+            if (curr[0].RT == -1) {
+                curr[0].RT = Math.abs(curr[0].AT - t);
+            }
+
             // update the data of process into chart array if burst time is equals to 1 unit left
             if (CDetail.Bt === 1) {
                 chart.push(curr[0]);
@@ -73,20 +77,22 @@ let SjrfSolver = (AT = [], BT = []) => {
     }
 
     // calculate average Tat and average Wat and update the value in chart array
-    let avgTat = 0, avgWat = 0
+    let avgTat = 0, avgWat = 0, avgRt = 0
     chart.forEach((ele, i) => {
         chart[i]['TAT'] = Math.abs(ele.CT - ele.AT)
         chart[i]['WAT'] = Math.abs(ele.TAT - ele.BT)
         avgTat += chart[i]['TAT']
         avgWat += chart[i]['WAT']
+        avgRt += chart[i]['RT']
     })
     avgTat = avgTat / chart.length
     avgWat = avgWat / chart.length
-
+    avgRt=avgRt/chart.length
+    
     chart.sort((a, b) => a.index - b.index)
 
-    // return the chart array , avgTat , avgWat
-    return { chart, avgTat, avgWat }
+    // return the chart array , avgTat , avgWat,avgRt
+    return { chart, avgTat, avgWat,avgRt }
 }
 
 export default SjrfSolver;

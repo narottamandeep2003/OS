@@ -9,6 +9,7 @@ export default function HomeM() {
   const [sol, setSol] = useState([])
   const [AT, SAT] = useState("")
   const [BT, SBT] = useState("")
+  const [AvgRT, SAvgRT] = useState("")
   const [AvgTat, SAvgTat] = useState(0)
   const [AvgWat, SAvgWat] = useState(0)
 
@@ -41,10 +42,9 @@ export default function HomeM() {
         setSol(ans)
         SAvgTat((obj.avgTat).toPrecision(3))
         SAvgWat((obj.avgWat).toPrecision(3))
+        SAvgRT((obj.avgRt).toPrecision(3))
         SCView(!CView)
       }
-      console.log(A)
-      console.log(B)
 
     }
 
@@ -135,6 +135,7 @@ export default function HomeM() {
                 <th scope="col">CT</th>
                 <th scope="col">TAT</th>
                 <th scope="col">WAT</th>
+                <th scope="col">RT</th>
               </tr>
             </thead>
             <tbody>
@@ -147,6 +148,7 @@ export default function HomeM() {
                     <td >{ele.CT}</td>
                     <td >{ele.TAT}</td>
                     <td >{ele.WAT}</td>
+                    <td >{ele.RT}</td>
                   </tr>
                 ))
               }
@@ -156,6 +158,7 @@ export default function HomeM() {
           <div className="foot">
             <button className='btn btn1'>AVG TAT : {AvgTat}</button>
             <button className='btn btn1'>AVG WAT : {AvgWat}</button>
+            <button className='btn btn1'>AVG RT : {AvgWat}</button>
           </div>
         </div>
       </>
