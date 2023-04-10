@@ -1,22 +1,26 @@
 let SjrfSolver = (AT = [], BT = []) => {
     // AT = [2, 5, 1, 0, 4];
     // BT = [6, 2, 8, 3, 4];
+    // info is a array of dictionary
     let info = [];
-
+    // insert the value into info array
     for (let i = 0; i < AT.length; i++) {
 
         info.push({ "index": i, "AT": AT[i], "BT": BT[i] })
 
 
     }
-
+    // sort the arr according to arrival time
     info.sort((a, b) => a.AT - b.AT)
-    
+
+    // chart is output array
     let chart = []
     let t = 0
+
+
     while (info.length !== 0) {
         let curr = []
-
+        // collect all the processes till current time
         info.forEach((e) => {
 
             if (e.AT <= t) {
@@ -26,11 +30,11 @@ let SjrfSolver = (AT = [], BT = []) => {
 
         })
 
-
+        // sort the array according to burst time
         curr.sort((a, b) => a.BT - b.BT)
 
-        // console.log("a",curr)
-
+        // if we have process in array take process which have less burst time and execute the process one unit time
+        // and push the process data into chart array and remove from info array 
         if (curr.length !== 0) {
 
             let CDetail = {}
@@ -42,6 +46,7 @@ let SjrfSolver = (AT = [], BT = []) => {
 
             })
 
+            // update the data of process into chart array if burst time is equals to 1 unit left
             if (CDetail.Bt === 1) {
                 chart.push(curr[0]);
                 t = t + 1;
@@ -54,30 +59,34 @@ let SjrfSolver = (AT = [], BT = []) => {
 
                 })
             }
+            // execute the process one unit time
             else {
                 t = t + 1;
                 info[CDetail.i].BT--;
             }
-
-            // curr.shift()
         }
+        //  if there is no process in the array increase the time +1
         else {
-            // console.log(curr)
             t++;
         }
 
     }
-    let avgTat=0,avgWat=0
+
+    // calculate average Tat and average Wat and update the value in chart array
+    let avgTat = 0, avgWat = 0
     chart.forEach((ele, i) => {
         chart[i]['TAT'] = Math.abs(ele.CT - ele.AT)
         chart[i]['WAT'] = Math.abs(ele.TAT - ele.BT)
-        avgTat+=chart[i]['TAT']
-        avgWat+=chart[i]['WAT']
+        avgTat += chart[i]['TAT']
+        avgWat += chart[i]['WAT']
     })
-    avgTat=avgTat/chart.length
-    avgWat=avgWat/chart.length
+    avgTat = avgTat / chart.length
+    avgWat = avgWat / chart.length
+
     chart.sort((a, b) => a.index - b.index)
-    return {chart,avgTat,avgWat}
+
+    // return the chart array , avgTat , avgWat
+    return { chart, avgTat, avgWat }
 }
 
 export default SjrfSolver;

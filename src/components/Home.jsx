@@ -114,7 +114,7 @@ export default function HomeM() {
 
               <div className='Btns'>
                 <button className={`btn btn-primary sBtn ${(SAlgo) ? "active" : ""} `} onClick={handleclick1}>SJF</button>
-                <button className={`btn btn-primary sBtn ${(SAlgo) ? "" : "active"} `} onClick={handleclick2}>SRJF</button>
+                <button className={`btn btn-primary sBtn ${(SAlgo) ? "" : "active"} `} onClick={handleclick2}>SRTF</button>
 
               </div>
             </div>
@@ -126,7 +126,7 @@ export default function HomeM() {
         <button className='btn btn1 btn2' onClick={() => { SCView(!CView) }}>Back</button>
         <div className='con'>
           <table className="chart table caption-top">
-            <caption>{(SAlgo) ? ("SJF Algo") : ("SRJF Algo")} </caption>
+            <caption>{(SAlgo) ? ("SJF Algo") : ("SRTF Algo")} </caption>
             <thead className="table-dark">
               <tr>
                 <th scope="col">P Id</th>
