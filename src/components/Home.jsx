@@ -27,13 +27,13 @@ export default function HomeM() {
         if (isNaN(Number(s))) {
           return 0
         }
-        return Number(s)
+        return Math.abs(Number(s))
       })
       B = B.map((s) => {
         if (isNaN(Number(s))) {
           return 0
         }
-        return Number(s)
+        return Math.abs(Number(s))
       })
 
       if (A.length === B.length) {
@@ -62,26 +62,37 @@ export default function HomeM() {
         if (isNaN(Number(s))) {
           return 0
         }
-        return Number(s)
+        return Math.abs(Number(s))
       })
       B = B.map((s) => {
         if (isNaN(Number(s))) {
           return 0
         }
-        return Number(s)
+        return Math.abs(Number(s))
       })
       if (A.length === 0 || B.length === 0) {
         return
       }
       if (A.length === B.length) {
-
-        let obj = SjrfSolver(A, B)
-        let ans = obj.chart
-        SAvgTat((obj.avgTat).toPrecision(3))
-        SAvgWat((obj.avgWat).toPrecision(3))
-        setSol(ans)
-        SCView(!CView)
+        let bool = true
+        B.forEach((e) => {
+          console.log(e)
+          if (e === 0)
+            bool = false
+        })
+        if (bool) {
+          const obj = SjrfSolver(A, B)
+          const ans = obj.chart
+          SAvgTat((obj.avgTat).toPrecision(3))
+          SAvgWat((obj.avgWat).toPrecision(3))
+          SAvgRT((obj.avgRt).toPrecision(3))
+          setSol(ans)
+          SCView(!CView)
+        }
+        return
       }
+
+      // }
       console.log(A)
       console.log(B)
     }
@@ -158,7 +169,7 @@ export default function HomeM() {
           <div className="foot">
             <button className='btn btn1'>AVG TAT : {AvgTat}</button>
             <button className='btn btn1'>AVG WAT : {AvgWat}</button>
-            <button className='btn btn1'>AVG RT : {AvgWat}</button>
+            <button className='btn btn1'>AVG RT : {AvgRT}</button>
           </div>
         </div>
       </>
